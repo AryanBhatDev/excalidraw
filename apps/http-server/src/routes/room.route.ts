@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { roomEnter } from '../controllers/room.controller';
+import { validate } from '../middlewares/room.middleware';
 
 
 export const roomRouter = Router();
 
-roomRouter.post('/',roomEnter)
+roomRouter.post('/',validate,roomEnter)

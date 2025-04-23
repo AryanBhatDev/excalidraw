@@ -42,7 +42,6 @@ class UserService {
         if(!isCorrectPassword){
             throw new Error('Incorrect password. Please try again')
         }
-        console.log(process.env.JWT_SECRET)
 
         const token = jwt.sign({id:user.id},process.env.JWT_SECRET)
 
