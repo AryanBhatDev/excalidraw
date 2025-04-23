@@ -1,6 +1,10 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { userRouter } from './routes/user.route';
 import { roomRouter } from './routes/room.route';
+import dotenv from 'dotenv';
+import path from 'path'
+
+dotenv.config({path:path.resolve(__dirname,'../../../.env')})
 
 const app = express();
 const port = process.env.PORT;
