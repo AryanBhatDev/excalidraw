@@ -30,10 +30,10 @@ const userSignin = async(req:Request,res:Response):Promise<void>=>{
             throw new Error('Invalid inputs')
         }
 
-        const response = await userService.userSignin(validatedPayload.data);
+        const token = await userService.userSignin(validatedPayload.data);
         res.status(200).json({
             message:"User signin successful",
-            response
+            token
         })
     }catch(e){
         const errorMessage = e instanceof Error ? e.message : "Unknown Error. Please try again"

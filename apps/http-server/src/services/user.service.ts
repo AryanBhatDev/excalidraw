@@ -1,6 +1,7 @@
 import { prisma } from "@repo/db/client";
 import { IUserSigninDTO, IUserSignupDTO } from "../interfaces/user.interface";
 import { checkPassword, encryptPassword } from "@repo/utils/password"
+import jwt from 'jsonwebtoken'
 
 
 class UserService {
@@ -25,7 +26,7 @@ class UserService {
         })
 
     }
-    async userSignin(body:IUserSigninDTO):Promise<string>{
+    async userSignin(body:IUserSigninDTO):Promise<Record<string,string>>{
         const { username , password } = body;
         const user = await prisma.user.findFirst({
             where:{
@@ -37,8 +38,15 @@ class UserService {
         }
 
         const isCorrectPassword = await checkPassword(password,user.password);
+        
+        if(!isCorrectPassword){
+            throw new Error('Incorrect password. Please try again')
+        }
+        console.log(process.env.JWT_SECRET)
 
-        return user.username
+        const token = jwt.sign({id:user.id},process.env.JWT_SECRET)
+
+        return { token }
  
     }
 }

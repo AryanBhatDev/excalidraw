@@ -1,1 +1,1 @@
-{"root":["./src/index.ts","./src/controllers/user.controller.ts","./src/interfaces/user.interface.ts","./src/routes/user.route.ts","./src/services/user.service.ts"],"version":"5.8.2"}
+{"root":["./src/index.ts","./src/controllers/room.controller.ts","./src/controllers/user.controller.ts","./src/interfaces/user.interface.ts","./src/routes/room.route.ts","./src/routes/user.route.ts","./src/services/user.service.ts","./src/types/environment.d.ts"],"version":"5.8.2"}
