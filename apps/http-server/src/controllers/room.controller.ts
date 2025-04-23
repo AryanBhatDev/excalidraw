@@ -1,8 +1,14 @@
 import { Request, Response } from "express";
 import { roomService } from "../services/room.service";
+import { RoomSchema } from "@repo/utils/zod";
 
 const roomEnter = async(req:Request,res:Response):Promise<void>=>{
     try{
+        const data = RoomSchema.safeParse(req.body);
+        if(!data.success){
+            throw new Error('Incorrect room input')
+        }
+
         const id = req?.user?._id;
 
         if(!id){

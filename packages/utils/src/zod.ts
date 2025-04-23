@@ -11,10 +11,15 @@ export const passwordSchema = z
 
 export const UserSignupSchema = z.object({
     username:z.string().min(8),
+    name:z.string(),
     password:passwordSchema
 })
 
 export const UserSigninSchema = z.object({
     username:z.string().min(8),
     password:passwordSchema
+})
+
+export const RoomSchema = z.object({
+    name:z.string().min(3).max(20)
 })
