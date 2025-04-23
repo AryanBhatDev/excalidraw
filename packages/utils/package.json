@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "exports": {
-    "./utilities": "./src/index.ts"
+    "./password": "./src/password.ts",
+    "./zod": "./src/zod.ts"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*"
@@ -14,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/bcrypt": "^5.0.2",
-    "bcrypt": "^5.1.1"
+    "bcrypt": "^5.1.1",
+    "zod": "^3.24.3"
   }
 }

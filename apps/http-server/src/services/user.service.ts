@@ -1,10 +1,10 @@
 import { prisma } from "@repo/db/client";
-import { IUserSignupDTO } from "../interfaces/user.interface";
-import { encryptPassword } from "@repo/utils/utilities";
+import { IUserSigninDTO, IUserSignupDTO } from "../interfaces/user.interface";
+import { checkPassword, encryptPassword } from "@repo/utils/password"
 
 
 class UserService {
-    async userSignup(body:IUserSignupDTO){
+    async userSignup(body:IUserSignupDTO):Promise<void>{
         const { username , password } = body;
         const user = await prisma.user.findFirst({
             where:{
@@ -24,6 +24,22 @@ class UserService {
             }
         })
 
+    }
+    async userSignin(body:IUserSigninDTO):Promise<string>{
+        const { username , password } = body;
+        const user = await prisma.user.findFirst({
+            where:{
+                username
+            }
+        })
+        if(!user){
+            throw new Error('Username not found')
+        }
+
+        const isCorrectPassword = await checkPassword(password,user.password);
+
+        return user.username
+ 
     }
 }
 
