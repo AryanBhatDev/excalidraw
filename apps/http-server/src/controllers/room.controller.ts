@@ -29,5 +29,27 @@ const roomEnter = async(req:Request,res:Response):Promise<void>=>{
     }
 }
 
+const getChats = async(req:Request,res:Response):Promise<void>=>{
+    try{
+        const roomId = req.params.roomId ;
+    
+        if(!roomId){
+            throw new Error('Room id not provided')
+            
+        }
+        
+        const chats = await roomService.getChats(Number(roomId));
 
-export { roomEnter }
+        res.status(200).json({
+            chats
+        })
+
+    }catch(e){
+        res.status(403).json({
+            message: e instanceof Error? e.message :"Unauthorized"
+        })
+    }
+
+}
+
+export { roomEnter, getChats }
