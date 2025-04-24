@@ -3,6 +3,7 @@ import { userRouter } from './routes/user.route';
 import { roomRouter } from './routes/room.route';
 import dotenv from 'dotenv';
 import path from 'path'
+import cors from 'cors'
 
 dotenv.config({path:path.resolve(__dirname,'../../../.env')})
 
@@ -10,6 +11,7 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
+app.use(cors());
 
 app.use('/api/v1/user',userRouter);
 app.use('/api/v1/room',roomRouter)

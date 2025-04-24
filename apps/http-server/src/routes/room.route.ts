@@ -6,5 +6,5 @@ import { validate } from '../middlewares/room.middleware';
 export const roomRouter = Router();
 
 roomRouter.post('/',validate,roomEnter)
-roomRouter.get('/chats/:roomId',validate,getChats)
+roomRouter.get('/chats/:roomId',getChats)
 roomRouter.get('/slug',getRoom)
