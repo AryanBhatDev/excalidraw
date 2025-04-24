@@ -33,6 +33,15 @@ class RoomService{
         })
         return messages;
     }
+
+    async getRoom(slug:string){
+        const room = await prisma.room.findFirst({
+            where:{
+                slug
+            }
+        })
+        return room
+    }
 }
 
 export const roomService = new RoomService();
