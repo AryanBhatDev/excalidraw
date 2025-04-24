@@ -2,7 +2,7 @@ import { prisma } from "@repo/db/client";
 
 
 class RoomService{
-    async roomEnter(id:string):Promise<string>{
+    async roomEnter(name:string,id:string):Promise<number>{
         const isUser = await prisma.user.findFirst({
             where:{
                 id
@@ -11,9 +11,14 @@ class RoomService{
         if(!isUser){
             throw new Error('User not found')
         }
-        const roomId = (Math.random()*1000000).toString();
+        const createdRoom = await prisma.room.create({
+            data:{
+                slug: name,
+                adminId:id
+            }
+        })
 
-        return roomId
+        return createdRoom.id
     }
 }
 
