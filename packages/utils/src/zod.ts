@@ -10,13 +10,14 @@ export const passwordSchema = z
 );
 
 export const UserSignupSchema = z.object({
-    username:z.string().min(8),
-    name:z.string(),
-    password:passwordSchema
+    email:z.string().email(),
+    username:z.string().min(8,{message:"Username required minimum of 8 characters"}),
+    password:passwordSchema,
+    photo:z.string().url()
 })
 
 export const UserSigninSchema = z.object({
-    username:z.string().min(8),
+    email:z.string().email(),
     password:passwordSchema
 })
 

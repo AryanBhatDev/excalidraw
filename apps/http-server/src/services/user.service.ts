@@ -6,10 +6,10 @@ import jwt from 'jsonwebtoken'
 
 class UserService {
     async userSignup(body:IUserSignupDTO):Promise<void>{
-        const { username , password } = body;
+        const { email , password, photo, username } = body;
         const user = await prisma.user.findFirst({
             where:{
-                username
+                email
             }
         })
         if(user){
@@ -20,17 +20,19 @@ class UserService {
 
         await prisma.user.create({
             data:{
-                username,
-                password:hashedPassword
+                email,
+                password:hashedPassword,
+                photo,
+                username
             }
         })
 
     }
     async userSignin(body:IUserSigninDTO):Promise<Record<string,string>>{
-        const { username , password } = body;
+        const { email , password } = body;
         const user = await prisma.user.findFirst({
             where:{
-                username
+                email
             }
         })
         if(!user){
